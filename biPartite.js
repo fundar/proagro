@@ -2,7 +2,7 @@
 	var bP={};	
 	var b=10, bb=500, height=600, buffMargin=1, minHeight=14;
 	var c1=[-160, 10], c2=[-30, 100], c3=[20, 170]; //Column positions of labels.
-	var colors =["#3366CC", "#DC3912",  "#FF9900","#109618", "#990099", "#0099C6"];
+	var colors =["#3366CC", "#DC3912",  "#FF9900","#109618", "#990099", "#0099C6","#3366CC", "#DC3912",  "#FF9900","#109618", "#990099", "#0099C6","#3366CC", "#DC3912",  "#FF9900","#109618", "#990099", "#0099C6","#3366CC", "#DC3912",  "#FF9900","#109618", "#990099", "#0099C6","#3366CC", "#DC3912",  "#FF9900","#109618", "#990099", "#0099C6"];
 	
 	bP.partData = function(data,p){
 		var sData={};
@@ -124,7 +124,7 @@
 			.attr("text-anchor","start" );
 			
 		mainbar.append("text").attr("class","barvalue")
-			.attr("x", c2[p]).attr("y",function(d){ return d.middle+5;})
+			.attr("x", c2[p] + 10).attr("y",function(d){ return d.middle+5;})
 			.text(function(d,i){ return d.value ;})
 			.attr("text-anchor","end");
 			

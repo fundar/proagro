@@ -43,9 +43,13 @@ var cs = d3.scale.linear()
 
 			ricos = pobr.map(function(arr){return arr[2]});
 
+			d3.json("./datos/nomun.json",function(error,noms){
+
+			munom = noms;
+
 		 	cult = 1;
 
-		 	var munar = datm.map(function(arr){return arr[cult]});
+		 	munar = datm.map(function(arr){return arr[cult]});
 
 		 	cs.domain([0,d3.max(munar)]);
 		
@@ -70,8 +74,17 @@ var cs = d3.scale.linear()
 					.attr("class","muni2")
 					.attr("d", path);
 
-			//mun.on("mouseover",overed)
-			//mun.on("mouseout",outed);
+			mun3 = d3.select("#mapa")
+					.append("g")
+					.attr("class","polis3")
+					.selectAll(".muni")
+					.data(municipios.features)
+					.enter().append("path")
+					.attr("class","muni3")
+					.attr("d", path);
+
+			mun3.on("mouseover",overed)
+			mun3.on("mouseout",outed);
 
 			console.log(pobres[4][1]);
 
@@ -104,6 +117,8 @@ var cs = d3.scale.linear()
 			//yrbt = d3.selectAll(".yrbt").on("click",btclkd);
 			})
 
+			})
+
 		})
 
 	})
@@ -112,14 +127,48 @@ var cs = d3.scale.linear()
 
 function clk(p,j){
 
+	d3.select("g.mlabel").remove();
+
 	munar = datm.map(function(arr){return arr[j + 1]});
+
+	var k = j;
 
 	cs.domain([0,d3.max(munar)]);
 
 	mun.transition().duration(750).style("opacity",function(d,i){if(munar[i] === 0) {return 0} else {return cs(munar[i])};})
 
+	mlabel = d3.select("#mapa")
+			.append("g")
+			.attr("class","mlabel")
+			.append("text")
+			.attr("class","textmlab")
+			.attr("x",width / 2)
+			.attr("y",50)
+			.text(function(d,i){
+				return cultivos[k]})
+			.style("font-size",width/55 + "px")
+			.style("text-anchor","middle");
+
 }
 
 function overed(d,i){
-	mun.classed("slctd",function(p,j){return i === j});
+
+	var format = d3.format(",.0f")
+
+	var k = i;
+
+	label = d3.select("#mapa")
+			.append("g")
+			.attr("class","label")
+			.append("text")
+			.attr("class","textlab")
+			.attr("x",50)
+			.attr("y",height - 100)
+			.text(function(d,i){
+				return munom[k] + " recibío " +  format(munar[k]) + " pesos"})
+			.style("font-size",width/55 + "px");
+}
+
+function outed(d,i){
+	d3.select("g.label").remove();
 }
