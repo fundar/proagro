@@ -1,0 +1,21 @@
+.muni2 {
+	fill: none;
+}
+
+
+.pobre {
+	fill: none;
+	stroke: #636363;
+	stroke-width: 0.4;
+}
+
+.rico {
+	fill: none;
+	stroke: blue;
+	stroke-width: 0.4;
+}
+
+.slctd{
+	stroke: #636363;
+	stroke-width: 2;
+}
